@@ -14,3 +14,7 @@ Possible APIs for use:
 -User logs in. They select a geographic area (current location or zip code). Make decisions regarding the kind of activities they are interested in. Once they confirm their choices, the app returns a map with options for each of their activities within a specified proximity of each other.
 
 -One user creates a date suggestion, sends to another user, and they confirm or send back alternatives.
+
+-Kenton, Raj back-end javascript, api, firebase
+
+-Michelle, Ross front-end html, bootstrap, css
