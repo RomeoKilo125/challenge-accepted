@@ -15,6 +15,6 @@ Possible APIs for use:
 
 -One user creates a date suggestion, sends to another user, and they confirm or send back alternatives.
 
--Kenton, Raj back-end javascript, api, firebase
+-Kenton, Raj back-end javascript, api, firebase !!
 
--Michelle, Ross front-end html, bootstrap, css
+-Michelle, Ross front-end html, bootstrap, css !!
