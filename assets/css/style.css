@@ -8,6 +8,11 @@
   background-size: cover;
 }
 
+#resultsPage {
+  background-image: url('../images/blurredStreet.jpeg');
+  background-size: cover;
+}
+
 .jumbotron {
   width: 100%;
   margin: auto;
@@ -88,4 +93,9 @@
 #submitTwo {
   width: 25%;
   margin: auto;
+}
+
+#instructions,
+#results {
+  color: lightgray;
 }
