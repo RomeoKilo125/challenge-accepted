@@ -31,7 +31,8 @@ h3 {
   margin: 0 auto;
 }
 
-.form-signin .form-signin-heading, .form-signin .checkbox {
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
   margin-bottom: 10px;
 }
 
@@ -72,14 +73,18 @@ h3 {
   margin-top: 30px;
 }
 
-.about, .instructions, .results {
+.about,
+.instructions,
+.results {
   background: lightgray;
   width: 25%;
   margin: auto;
   margin-top: 30px;
 }
 
-#meal-results, #movie-results, #event-results {
+#meal-results,
+#movie-results,
+#event-results {
   background: lightgray;
   width: 25%;
   margin: auto;
@@ -107,6 +112,16 @@ h3 {
 }
 
 #zip {
+  float: left;
+}
+
+#movie {
+  background: lightgray;
+  float: left;
+}
+
+#event {
+  clear: both;
   background: lightgray;
   text-align: center;
 }
