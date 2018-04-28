@@ -1,15 +1,15 @@
 #signInPage {
-  background-image: url('../images/blurredStreet.jpeg');
+  background-image: url("../images/blurredStreet.jpeg");
   background-size: cover;
 }
 
 #optionsPage {
-  background-image: url('../images/blurredStreet.jpeg');
+  background-image: url("../images/blurredStreet.jpeg");
   background-size: cover;
 }
 
 #resultsPage {
-  background-image: url('../images/blurredStreet.jpeg');
+  background-image: url("../images/blurredStreet.jpeg");
   background-size: cover;
 }
 
@@ -71,15 +71,6 @@
   margin-top: 30px;
 }
 
-#meal,
-#movie,
-#event {
-  background: lightgray;
-  width: 25%;
-  margin: auto;
-  margin-top: 30px;
-}
-
 #meal-results,
 #movie-results,
 #event-results {
@@ -89,13 +80,29 @@
   margin-top: 30px;
 }
 
-#submit,
-#submitTwo {
+#submit {
   width: 25%;
   margin: auto;
 }
 
-#instructions,
-#results {
-  color: lightgray;
+#topContainer {
+  float: left;
+  width: 33%;
+}
+
+#instructions {
+  background: lightgray;
+}
+
+#date {
+  background: lightgray;
+}
+
+#movie {
+  background: lightgray;
+}
+
+#event {
+  clear: both;
+  background: lightgray;
 }
