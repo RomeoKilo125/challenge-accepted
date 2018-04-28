@@ -8,3 +8,29 @@ var config = {
   messagingSenderId: "783539858113"
 };
 firebase.initializeApp(config);
+database = firebase.database();
+var rootRef = database.ref();
+
+var userObj = {
+  userId: "",
+  zipCode: 0
+};
+
+$("#submit").on("click", addUser);
+
+function addUser() {
+  console.log("addUser function invoked");
+  if (
+    $("#inputEmail")
+      .val()
+      .trim() !== ""
+  ) {
+    userObj.userId = $("#inputEmail")
+      .val()
+      .trim();
+    var usersRef = rootRef.child("users").push();
+    usersRef.set(userObj);
+  } else {
+    alert("Come on now!! Email ID cannot be empty");
+  }
+}
