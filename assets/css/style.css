@@ -1,3 +1,13 @@
+#signInPage {
+  background-image: url('../images/blurredStreet.jpeg');
+  background-size: cover;
+}
+
+#optionsPage {
+  background-image: url('../images/blurredStreet.jpeg');
+  background-size: cover;
+}
+
 .jumbotron {
   width: 75%;
   margin: auto;
