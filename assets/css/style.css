@@ -9,9 +9,10 @@
 }
 
 .jumbotron {
-  width: 75%;
+  width: 100%;
   margin: auto;
   text-align: center;
+  font-family: "Montserrat", sans-serif;
 }
 
 .form-signin {
@@ -81,4 +82,10 @@
   width: 25%;
   margin: auto;
   margin-top: 30px;
+}
+
+#submit,
+#submitTwo {
+  width: 25%;
+  margin: auto;
 }
