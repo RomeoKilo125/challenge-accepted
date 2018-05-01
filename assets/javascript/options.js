@@ -2,7 +2,9 @@ console.log("linked");
 
 //creating an on click for submitTwo to record what's been input
 
-$("#submit").on("click", function (event) {
+
+$("#submit").on("click", function(event) {
+
   console.log("clicked");
   event.preventDefault();
 
@@ -29,6 +31,7 @@ $("#submit").on("click", function (event) {
   $.ajax({
     url: queryURL,
     method: "GET"
+
   }).then(function (response) {
     movieChallenger();
 
@@ -56,7 +59,6 @@ $("#submit").on("click", function (event) {
       console.log("Playing at this date and time: " + randomTheatreArray.dateTime);
       console.log("Playing at this theatre: " + randomTheatreArray.theatre.name);
     };
-
   });
 });
 
