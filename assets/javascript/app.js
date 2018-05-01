@@ -36,3 +36,7 @@ function addUser() {
     alert("Come on now!! Email ID cannot be empty");
   }
 }
+
+$(window).on('load', function() {
+  $('#loginModal').modal('show');
+});
