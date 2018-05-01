@@ -96,10 +96,12 @@
 
 #date {
   background: lightgray;
+  float: left;
 }
 
 #movie {
   background: lightgray;
+  float: left;
 }
 
 #event {
