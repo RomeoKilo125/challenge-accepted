@@ -1,9 +1,10 @@
 console.log("linked");
 
 //creating an on click for submitTwo to record what's been input
+var users = database.ref('users');
 
 
-$("#submit").on("click", function(event) {
+$("#searchSubmit").on("click", function(event) {
 
   console.log("clicked");
   event.preventDefault();
@@ -13,13 +14,13 @@ $("#submit").on("click", function(event) {
   var zipCode = $(".zipcode")
     .val()
     .trim();
-  console.log(zipCode);
+  // console.log(zipCode);
 
   //I think I need a moment.js function to get the date to appear YYYY-MM-DD
   var date = $(".date")
     .val()
     .trim();
-  console.log(date);
+  // console.log(date);
 
   var queryURL =
     "http://data.tmsapi.com/v1.1/movies/showings?startDate=" +
@@ -32,21 +33,45 @@ $("#submit").on("click", function(event) {
     url: queryURL,
     method: "GET"
 
-  }).then(function (response) {
-    movieChallenger();
+  }).then(function(response) {
+
+// declare an empty array to hold the result
+    let results = [];
+    // search results until you find one at least 1 hour in the future
+    do {
+
+      results = movieChallenger();
+
+      var time = moment(results[1], 'YYYY-MM-DDThh:mm');
+
+      console.log(time.diff(moment(), 'hours'));
+    } while (time.diff(moment(), 'hours') < 0);
+
+    // set results variables
+    var title = results[0];
+    var showTime = moment(results[1], 'YYYY-MM-DDThh:mm').format('dddd MM/DD/YY hh:mm')
+    var theatre = results[2];
+
+    // log results
+    console.log("Your Movie Title is: " + title);
+    console.log("Playing at this date and time: " + showTime);
+    console.log("Playing at this theatre: " + theatre);
+
 
     function movieChallenger() {
+
+      // console.log(response);
 
       //creating a random integer to pull random movie titles.
       var rT = Math.floor(Math.random() * response.length);
       //console.log(rT);
-      //console.log(response[rT]);
+      // console.log(response[rT]);
 
       var randomTitle = response[rT].title;
-      console.log("Your Movie Title is: " + randomTitle);
+      // console.log("Your Movie Title is: " + randomTitle);
 
       //creating a random integer to pull random showtimes of the selected random movie
-      var rS = Math.floor(Math.random() * response[rT].showtimes);
+      var rS = Math.floor(Math.random() * response[rT].showtimes.length);
 
       var randomShowtimesArray = response[rT].showtimes;
       //console.log(randomShowtimesArray);
@@ -56,8 +81,17 @@ $("#submit").on("click", function(event) {
       //console.log(randomShowtimes[rTheat]);
 
       var randomTheatreArray = randomShowtimesArray[rTheat];
-      console.log("Playing at this date and time: " + randomTheatreArray.dateTime);
-      console.log("Playing at this theatre: " + randomTheatreArray.theatre.name);
+
+      var selectedShowDateTime = randomTheatreArray.dateTime;
+
+      var selectedTheatre = randomTheatreArray.theatre.name;
+
+
+      // console.log("Playing at this date and time: " + randomTheatreArray.dateTime);
+      // console.log("Playing at this theatre: " + randomTheatreArray.theatre.name);
+
+      return [randomTitle, selectedShowDateTime, selectedTheatre]
+
     };
   });
 });
