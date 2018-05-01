@@ -1,3 +1,4 @@
+/*begin index.html*/
 #signInPage {
   background-image: url("../images/blurredStreet.jpeg");
   background-size: cover;
@@ -67,6 +68,7 @@ h3 {
 }
 
 #email {
+  font-family: "Montserrat", sans-serif;
   background: grey;
   width: 25%;
   margin: auto;
@@ -74,8 +76,8 @@ h3 {
 }
 
 .about,
-.instructions,
-.results {
+.instructions .results {
+  font-family: "Montserrat", sans-serif;
   background: lightgray;
   width: 25%;
   margin: auto;
@@ -94,16 +96,19 @@ h3 {
 .submit {
   width: 25%;
   margin: auto;
+  font-family: "Montserrat", sans-serif;
 }
 
-#topContainer {
-  float: left;
-  width: 33%;
-}
+/*end index.html*/
 
 #instructions {
   background: lightgray;
   text-align: center;
+  /*begin options.html*/
+}
+
+#optionsPage {
+  font-family: "Montserrat", sans-serif;
 }
 
 #date {
@@ -113,11 +118,20 @@ h3 {
 
 #zip {
   float: left;
+  border-radius: 25px;
+  padding: 15px;
+  text-align: center;
+  margin: auto;
 }
 
 #movie {
   background: lightgray;
   float: left;
+  border-radius: 25px;
+  padding: 15px;
+  text-align: center;
+
+  margin: auto;
 }
 
 #event {
@@ -125,3 +139,27 @@ h3 {
   background: lightgray;
   text-align: center;
 }
+
+#instructions {
+  background: lightgray;
+  max-width: 50%;
+  text-align: center;
+  margin: auto;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+#topContainer {
+  margin-top: 20px;
+}
+
+#event {
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+  margin-top: 20px;
+  max-width: 75%;
+  border-radius: 25px;
+}
+/*end options.html*/
