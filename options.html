@@ -10,16 +10,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
-
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <script type="text/javascript" src="assets/javascript/app.js">
+
     </script>
 
 </head>
 
 <body id="optionsPage">
-
-
 
     <br>
 
@@ -27,39 +25,48 @@
         <div class="jumbotron">
             <h1 class="display-4">Challenge Accepted!</h1>
         </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div id="instructions">
-                        instructions go here
+                        Instuctions go here
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="topContainer" class="container">
-            <div class="row">
+    <div id="topContainer" class="container">
+        <div class="row">
 
-                <div class="col-md-6" id="date">
-                    <input type="date" class="date">
-                </div>
+            <div class="col-md-5" id="date">
+                Chosen Date:
+                <input type="date" class="date">
+            </div>
 
-                <div class="col-md-6" id="movie">
-                    <input type="text" class="zipcode">zipcode</input>
-
-                </div>
+            <div class="col-md-5" id="movie">
+                Zipcode:
+                <input type="text" class="zipcode"></input>
 
             </div>
+
         </div>
+    </div>
 
-
-        <div id="event">
-            event categories
+    <div class: "container">
+        <div class: "row">
+            <div class: "col-md-5">
+                <div id="event">
+                    Event categories
+                </div>
+            </div>
         </div>
+    </div>
 
-        <br>
+    <br>
 
-        <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 
     </div>
 </body>
