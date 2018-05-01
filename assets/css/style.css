@@ -13,6 +13,11 @@
   background-size: cover;
 }
 
+h3 {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
 .jumbotron {
   width: 100%;
   margin: auto;
@@ -25,13 +30,15 @@
   padding: 15px;
   margin: 0 auto;
 }
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
   margin-bottom: 10px;
 }
+
 .form-signin .checkbox {
   font-weight: normal;
 }
+
 .form-signin .form-control {
   position: relative;
   height: auto;
@@ -41,14 +48,17 @@
   padding: 10px;
   font-size: 16px;
 }
+
 .form-signin .form-control:focus {
   z-index: 2;
 }
+
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
@@ -62,25 +72,21 @@
   margin-top: 30px;
 }
 
-.about,
-.instructions,
-.results {
+.about, .instructions, .results {
   background: lightgray;
   width: 25%;
   margin: auto;
   margin-top: 30px;
 }
 
-#meal-results,
-#movie-results,
-#event-results {
+#meal-results, #movie-results, #event-results {
   background: lightgray;
   width: 25%;
   margin: auto;
   margin-top: 30px;
 }
 
-#submit {
+.submit {
   width: 25%;
   margin: auto;
 }
@@ -92,19 +98,15 @@
 
 #instructions {
   background: lightgray;
+  text-align: center;
 }
 
 #date {
   background: lightgray;
-  float: left;
+  text-align: center;
 }
 
-#movie {
+#zip {
   background: lightgray;
-  float: left;
-}
-
-#event {
-  clear: both;
-  background: lightgray;
+  text-align: center;
 }

@@ -1,4 +1,5 @@
 // Initialize Firebase
+var userEmail = "";
 var config = {
   apiKey: "AIzaSyD9MW7ayHsSrRQ6P50xTLrYKKZY8JWB0Nc",
   authDomain: "challenge-accepted-405e8.firebaseapp.com",
@@ -16,18 +17,19 @@ var userObj = {
   zipCode: 0
 };
 
-$("#submit").on("click", addUser);
+$("#loginSubmit").on("click", addUser);
 
 function addUser() {
   console.log("addUser function invoked");
   if (
     $("#inputEmail")
-      .val()
-      .trim() !== ""
+    .val()
+    .trim() !== ""
   ) {
-    userObj.userId = $("#inputEmail")
+    userEmail = $("#inputEmail")
       .val()
       .trim();
+    userObj.userId = userEmail;
     var usersRef = rootRef.child("users").push();
     usersRef.set(userObj);
   } else {
