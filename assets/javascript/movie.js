@@ -1,7 +1,7 @@
 console.log("linked");
 
 //creating an on click for submitTwo to record what's been input
-var rootRef = database.ref();
+var users = database.ref("users");
 
 $("#searchSubmit").on("click", function(event) {
   event.preventDefault();
@@ -37,7 +37,6 @@ $("#searchSubmit").on("click", function(event) {
       movieResults = movieChallenger();
 
       var time = moment(movieResults[1], "YYYY-MM-DDThh:mm");
-
     } while (!movieResults[0] || time.diff(moment(), "minutes") < 0);
 
     // set results variables
@@ -55,7 +54,6 @@ $("#searchSubmit").on("click", function(event) {
     // addResultToDB(userEmail, title, showTime, theatre);
 
     function movieChallenger() {
-
       //creating a random integer to pull random movie titles.
       var rT = Math.floor(Math.random() * response.length);
 
@@ -73,21 +71,19 @@ $("#searchSubmit").on("click", function(event) {
 
       //Showtime array includes the theatres.  We have to run a random number to get theatre selection.
       var selectedShowDateTime = "";
-      var selectedTheatre ="";
+      var selectedTheatre = "";
       do {
-
         var rTheat = Math.floor(Math.random() * randomShowtimesArray.length);
 
         var randomShowtime = randomShowtimesArray[rTheat];
 
         randomShowtimesArray.splice(rTheat, 1);
 
-         selectedShowDateTime = randomShowtime.dateTime;
+        selectedShowDateTime = randomShowtime.dateTime;
 
-         selectedTheatre = randomShowtime.theatre.name;
+        selectedTheatre = randomShowtime.theatre.name;
 
         var time = moment(selectedShowDateTime, "YYYY-MM-DDThh:mm");
-
       } while (randomShowtimesArray.length > 1 && time.diff(moment(), "mins") < 0);
 
       return [randomTitle, selectedShowDateTime, selectedTheatre];
