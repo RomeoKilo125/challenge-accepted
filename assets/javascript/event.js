@@ -1,7 +1,11 @@
-console.log("linked");
+console.log("JSlinked");
 
 //creating an on click for submitTwo to record what's been input
+<<<<<<< HEAD
 var rootRef = database.ref();
+=======
+var users = database.ref("users");
+>>>>>>> updated movie.js and got random information to be console.logged
 
 $("#searchSubmit").on("click", function(event) {
   console.log("clicked");
@@ -20,74 +24,50 @@ $("#searchSubmit").on("click", function(event) {
     .trim();
   // console.log(date);
 
-  var queryURL =
-    "http://data.tmsapi.com/v1.1/movies/showings?startDate=" +
+  //api.eventful.com/json/events/search?q=music&l=28282&within=10&units=miles&app_key=4D8Nvf3xRhSfBMqB
+
+  var queryString =
+    "http://api.eventful.com/json/events/search?q=music&t=" +
     date +
-    "&zip=" +
+    "&l=" +
     zipCode +
-    "&radius=10&api_key=cv2kmy58qkdgyhekzsnz7quz";
+    "&within=20&units=miles&app_key=4D8Nvf3xRhSfBMqB";
+
+  var queryURI = encodeURIComponent(queryString);
+  var cors = "http://cors-proxy.htmldriven.com/?url=";
+
+  var queryURL = cors + queryURI;
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    // declare an empty array to hold the result
-    let results = [];
-    // search results until you find one at least 1 hour in the future
-    do {
-      results = movieChallenger();
+    //console.log(response);
+    var showme = JSON.parse(response.body);
+    var eventsArray = showme.events.event;
+    console.log(event);
+    console.log(eventsArray);
+    eventResults = eventChallenger();
+    console.log(eventResults);
 
-      var time = moment(results[1], "YYYY-MM-DDThh:mm");
+    function eventChallenger() {
+      //creating a random integer to pull random events.
+      var rT = Math.floor(Math.random() * eventsArray.length);
+      console.log(rT);
 
-      console.log(time.diff(moment(), "hours"));
-    } while (time.diff(moment(), "hours") < 0);
+      var randomEvent = eventsArray[rT].title;
+      console.log("Your Random Event Is: " + randomEvent);
 
-    // set results variables
-    var title = results[0];
-    var showTime = moment(results[1], "YYYY-MM-DDThh:mm").format(
-      "dddd MM/DD/YY hh:mm"
-    );
-    var theatre = results[2];
+      var randomVenue = eventsArray[rT].venue_name;
+      console.log("Your Venue is: " + randomVenue);
 
-    // log results
-    console.log("Your Movie Title is: " + title);
-    console.log("Playing at this date and time: " + showTime);
-    console.log("Playing at this theatre: " + theatre);
-    console.log("zipCode " + zipCode);
+      var venueAddress = eventsArray[rT].venue_address;
+      console.log("Located at: " + venueAddress);
 
-    addResultToDB(userEmail, title, showTime, theatre, zipCode);
+      var venueTime = eventsArray[rT].start_time;
+      console.log("Start Time: " + venueTime);
 
-    function movieChallenger() {
-      // console.log(response);
-
-      //creating a random integer to pull random movie titles.
-      var rT = Math.floor(Math.random() * response.length);
-      //console.log(rT);
-      // console.log(response[rT]);
-
-      var randomTitle = response[rT].title;
-      // console.log("Your Movie Title is: " + randomTitle);
-
-      //creating a random integer to pull random showtimes of the selected random movie
-      var rS = Math.floor(Math.random() * response[rT].showtimes.length);
-
-      var randomShowtimesArray = response[rT].showtimes;
-      //console.log(randomShowtimesArray);
-
-      //Showtime array includes the theatres.  We have to run a random number to get theatre selection.
-      var rTheat = Math.floor(Math.random() * randomShowtimesArray.length);
-      //console.log(randomShowtimes[rTheat]);
-
-      var randomTheatreArray = randomShowtimesArray[rTheat];
-
-      var selectedShowDateTime = randomTheatreArray.dateTime;
-
-      var selectedTheatre = randomTheatreArray.theatre.name;
-
-      // console.log("Playing at this date and time: " + randomTheatreArray.dateTime);
-      // console.log("Playing at this theatre: " + randomTheatreArray.theatre.name);
-
-      return [randomTitle, selectedShowDateTime, selectedTheatre];
+      return [randomEvent, randomVenue, venueAddress, venueTime];
     }
   });
 });

@@ -1,7 +1,7 @@
 console.log("linked");
 
 //creating an on click for submitTwo to record what's been input
-var rootRef = database.ref();
+var users = database.ref("users");
 
 $("#searchSubmit").on("click", function(event) {
   console.log("clicked");
@@ -21,7 +21,7 @@ $("#searchSubmit").on("click", function(event) {
   // console.log(date);
 
   var queryURL =
-    "http://data.tmsapi.com/v1.1/movies/showings?startDate=" +
+    "https://data.tmsapi.com/v1.1/movies/showings?startDate=" +
     date +
     "&zip=" +
     zipCode +
@@ -54,10 +54,8 @@ $("#searchSubmit").on("click", function(event) {
     console.log("Playing at this date and time: " + showTime);
     console.log("Playing at this theatre: " + theatre);
 
-    addResultToDB(userEmail, title, showTime, theatre);
-
     function movieChallenger() {
-      // console.log(response);
+      //console.log(response);
 
       //creating a random integer to pull random movie titles.
       var rT = Math.floor(Math.random() * response.length);
