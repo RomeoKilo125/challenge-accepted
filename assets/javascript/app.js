@@ -23,15 +23,29 @@ function addUser() {
   console.log("addUser function invoked");
   if (
     $("#inputEmail")
-    .val()
-    .trim() !== ""
+      .val()
+      .trim() !== ""
   ) {
     userEmail = $("#inputEmail")
       .val()
       .trim();
     userObj.userId = userEmail;
-    var usersRef = rootRef.child("users").push();
-    usersRef.set(userObj);
+
+    var userIdRef = rootRef
+      .child("users")
+      .orderByChild("userId")
+      .equalTo(userEmail);
+
+    userIdRef.on("value", function(snapshot) {
+      if (snapshot.val()) {
+        console.log(userEmail + " is present");
+      } else {
+        console.log(userEmail + " is a new user");
+        var usersRef = rootRef.child("users").push();
+        usersRef.set(userObj);
+      }
+      console.log(snapshot.val());
+    });
   } else {
     alert("Come on now!! Email ID cannot be empty");
   }
