@@ -53,8 +53,9 @@ $("#searchSubmit").on("click", function(event) {
     console.log("Your Movie Title is: " + title);
     console.log("Playing at this date and time: " + showTime);
     console.log("Playing at this theatre: " + theatre);
+    console.log("zipCode " + zipCode);
 
-    addResultToDB(userEmail, title, showTime, theatre);
+    addResultToDB(userEmail, title, showTime, theatre, zipCode);
 
     function movieChallenger() {
       // console.log(response);
@@ -99,19 +100,18 @@ $("#searchSubmit").on("click", function(event) {
 
 //4-30-2018 -Need to create a function to pull a random movie and then a random theater and showtime for that movie
 
-function addResultToDB(userEmail, title, showTime, theatre) {
+function addResultToDB(userEmail, title, showTime, theatre, zipCode) {
   var userIdRef = rootRef
     .child("users")
     .orderByChild("userId")
     .equalTo(userEmail);
 
   userIdRef.on("child_added", function(snap) {
-    console.log(
-      snap.ref.update({
-        title: title,
-        showTime: showTime,
-        theatre: theatre
-      })
-    );
+    snap.ref.update({
+      title: title,
+      showTime: showTime,
+      theatre: theatre,
+      zipCode: zipCode
+    });
   });
 }
