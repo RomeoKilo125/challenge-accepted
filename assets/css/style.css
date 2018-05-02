@@ -1,16 +1,16 @@
 /*begin index.html*/
 #signInPage {
-  background-image: url("../images/blurredStreet.jpeg");
+  background: url("../images/blurredStreet.jpeg") no-repeat center center fixed;
   background-size: cover;
 }
 
 #optionsPage {
-  background-image: url("../images/blurredStreet.jpeg");
+  background: url("../images/blurredStreet.jpeg") no-repeat center center fixed;
   background-size: cover;
 }
 
 #resultsPage {
-  background-image: url("../images/blurredStreet.jpeg");
+  background: url("../images/blurredStreet.jpeg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -112,16 +112,19 @@ h3 {
 }
 
 #date {
-  background: lightgray;
+  /* background: lightgray; */
   text-align: center;
+  color: white;
+  font-weight: 800;
 }
 
 #zip {
-  float: left;
-  border-radius: 25px;
-  padding: 15px;
+  /* float: left; */
+  /* border-radius: 25px; */
+  /* padding: 15px; */
   text-align: center;
-  margin: auto;
+  color: white;
+  font-weight: 800;
 }
 
 #movie {
