@@ -1,16 +1,16 @@
 /*begin index.html*/
 #signInPage {
-  background-image: url("../images/blurredStreet.jpeg");
+  background: url("../images/blurredStreet.jpeg") no-repeat center center fixed;
   background-size: cover;
 }
 
 #optionsPage {
-  background-image: url("../images/blurredStreet.jpeg");
+  background: url("../images/blurredStreet.jpeg") no-repeat center center fixed;
   background-size: cover;
 }
 
 #resultsPage {
-  background-image: url("../images/blurredStreet.jpeg");
+  background: url("../images/blurredStreet.jpeg") no-repeat center center fixed;
   background-size: cover;
 }
 
