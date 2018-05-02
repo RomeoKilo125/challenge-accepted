@@ -1,11 +1,7 @@
 console.log("JSlinked");
 
 //creating an on click for submitTwo to record what's been input
-<<<<<<< HEAD
-var rootRef = database.ref();
-=======
 var users = database.ref("users");
->>>>>>> updated movie.js and got random information to be console.logged
 
 $("#searchSubmit").on("click", function(event) {
   console.log("clicked");
