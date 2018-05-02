@@ -35,17 +35,17 @@ $("#searchSubmit").on("click", function(event) {
     let results = [];
     // search results until you find one at least 1 hour in the future
     do {
-      results = movieChallenger();
+      movieResults = movieChallenger();
 
       var time = moment(results[1], "YYYY-MM-DDThh:mm");
 
-      console.log(time.diff(moment(), "hours"));
+      console.log("hours until: " + time.diff(moment(), "hours"));
     } while (time.diff(moment(), "hours") < 0);
 
     // set results variables
     var title = results[0];
     var showTime = moment(results[1], "YYYY-MM-DDThh:mm").format(
-      "dddd MM/DD/YY hh:mm"
+      "dddd MM/DD/YY hh:mm A"
     );
     var theatre = results[2];
 
@@ -57,34 +57,37 @@ $("#searchSubmit").on("click", function(event) {
     addResultToDB(userEmail, title, showTime, theatre);
 
     function movieChallenger() {
-      // console.log(response);
+      console.log(response);
 
       //creating a random integer to pull random movie titles.
       var rT = Math.floor(Math.random() * response.length);
-      //console.log(rT);
-      // console.log(response[rT]);
 
-      var randomTitle = response[rT].title;
-      // console.log("Your Movie Title is: " + randomTitle);
+      // isolate the selected movie
+      var selected = response[rT];
 
-      //creating a random integer to pull random showtimes of the selected random movie
-      var rS = Math.floor(Math.random() * response[rT].showtimes.length);
+      // remove the movie from the array in case we have to look again
+      response.splice(rT, 1);
 
-      var randomShowtimesArray = response[rT].showtimes;
-      //console.log(randomShowtimesArray);
+      // store the title of the film
+      var randomTitle = selected.title;
+
+      // store the showtimes array for the movie
+      var randomShowtimesArray = selected.showtimes;
 
       //Showtime array includes the theatres.  We have to run a random number to get theatre selection.
-      var rTheat = Math.floor(Math.random() * randomShowtimesArray.length);
-      //console.log(randomShowtimes[rTheat]);
+      do {
 
-      var randomTheatreArray = randomShowtimesArray[rTheat];
+        var rTheat = Math.floor(Math.random() * randomShowtimesArray.length);
 
-      var selectedShowDateTime = randomTheatreArray.dateTime;
+        var randomTheatreArray = randomShowtimesArray[rTheat];
 
-      var selectedTheatre = randomTheatreArray.theatre.name;
+        var selectedShowDateTime = randomTheatreArray.dateTime;
 
-      // console.log("Playing at this date and time: " + randomTheatreArray.dateTime);
-      // console.log("Playing at this theatre: " + randomTheatreArray.theatre.name);
+        var selectedTheatre = randomTheatreArray.theatre.name;
+
+        var time = moment(selectedShowDateTime, "YYYY-MM-DDThh:mm");
+
+      } while (time.diff(moment(), "hours") < 0);
 
       return [randomTitle, selectedShowDateTime, selectedTheatre];
     }
