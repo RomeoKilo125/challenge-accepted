@@ -87,7 +87,7 @@ $("#searchSubmit").on("click", function(event) {
 
         var time = moment(selectedShowDateTime, "YYYY-MM-DDThh:mm");
 
-      } while (time.diff(moment(), "hours") < 0);
+      } while (time.diff(moment(), "hours") < 0 || randomShowtimesArray.length > 1);
 
       return [randomTitle, selectedShowDateTime, selectedTheatre];
     }
