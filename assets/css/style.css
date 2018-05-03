@@ -1,11 +1,13 @@
 body {
-  background-image: url("../images/blurredStreet.jpeg");
+  /* background-image: url("../images/blurredStreet.jpeg"); */
+  background: url("../images/blurredStreet.jpeg") no-repeat center center fixed;
   background-size: cover;
   font-family: "Montserrat", sans-serif;
 }
 
 .jumbotron {
   text-align: center;
+  background: lightblue;
 }
 
 h3 {
@@ -28,17 +30,11 @@ h3 {
   font-weight: 800;
 }
 
-#zip {
-  background: lightgray;
-  text-align: center;
-  border-radius: 25px;
-  padding: 15px;
-  margin: auto;
-  margin-left: 10px;
-}
-
 #instructions {
-  background: lightgray;
+  background: lightblue;
+  color: black;
+  font-weight: 800;
+
   max-width: 50%;
   text-align: center;
   margin: auto;
@@ -55,4 +51,20 @@ h3 {
 #searchSubmit {
   width: 25%;
   margin: auto;
+}
+
+#signInBtn {
+  margin: 0 auto;
+  width: 10%;
+}
+
+.g-signin2 {
+  width: 100%;
+}
+
+.g-signin2 > div {
+  margin: 0 auto;
+}
+.modal-title {
+  text-align: center;
 }
