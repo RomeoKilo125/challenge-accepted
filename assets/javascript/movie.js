@@ -20,7 +20,7 @@ $("#searchSubmit").on("click", function(event) {
   // console.log(date);
 
   var queryURL =
-    "http://data.tmsapi.com/v1.1/movies/showings?startDate=" +
+    "https://data.tmsapi.com/v1.1/movies/showings?startDate=" +
     date +
     "&zip=" +
     zipCode +
