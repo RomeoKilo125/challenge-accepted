@@ -1,6 +1,7 @@
 console.log("linked");
 
 //creating an on click for submitTwo to record what's been input
+var rootRef = database.ref();
 var users = database.ref("users");
 
 $("#searchSubmit").on("click", function(event) {
