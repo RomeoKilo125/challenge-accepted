@@ -15,9 +15,12 @@ h3 {
   color: white;
 }
 
-#date {
+#date,
+.whiteFont {
+  /* background: lightgray; */
   text-align: center;
   color: white;
+  font-weight: 800;
 }
 
 #zip {
@@ -56,4 +59,18 @@ h3 {
 }
 .modal-title {
   text-align: center;
+}
+
+#poster {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+#fandangoBtn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }

@@ -63,7 +63,7 @@ $("#searchSubmit").on("click", function(event) {
 
       var venueTime = eventsArray[rT].start_time;
       console.log("Start Time: " + venueTime);
-
+      initMap();
       return [randomEvent, randomVenue, venueAddress, venueTime];
     }
   });
