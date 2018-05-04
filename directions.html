@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Travel modes in directions</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto', 'sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div id="map"></div>
+    <script>
+
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+
+
+
+        function initMap() {
+            var latLong;
+
+            var source = getUrlParameter("source");
+            var destination = getUrlParameter("destination")
+
+            console.log("source " + source);
+            console.log("destination " + destination);
+
+
+            $.ajax({
+                url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + source + "&key=AIzaSyB9DoXXE9yTPfe5wB8lvdaxwCUEtZxsWvs",
+                method: "GET"
+            }).then(function (response) {
+
+                var directionsDisplay = new google.maps.DirectionsRenderer;
+                var directionsService = new google.maps.DirectionsService;
+                console.log(response);
+                console.log(response.results[0].geometry.location);
+                latLong = response.results[0].geometry.location;
+
+
+                var mapInitProps = {
+                    zoom: 14,
+                    center: {
+                        lat: 0.0,
+                        lng: 0.0
+                    }
+                };
+
+                console.log(latLong);
+
+                mapInitProps.center.lat = latLong.lat;
+                mapInitProps.center.lng = latLong.lng;
+
+                var map = new google.maps.Map(document.getElementById('map'), mapInitProps);
+                directionsDisplay.setMap(map);
+
+                $.ajax({
+                    url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + destination + "&key=AIzaSyB9DoXXE9yTPfe5wB8lvdaxwCUEtZxsWvs",
+                    method: "GET"
+                }).then(function (response) {
+                    destination_latLong = response.results[0].geometry.location;
+
+
+                    var selectedMode = "DRIVING";
+                    directionsService.route({
+                        origin: { lat: latLong.lat, lng: latLong.lng },
+                        destination: { lat: destination_latLong.lat, lng: destination_latLong.lng },
+                        travelMode: google.maps.TravelMode[selectedMode]
+                    }, function (response, status) {
+                        if (status == 'OK') {
+                            directionsDisplay.setDirections(response);
+                        } else {
+                            window.alert('Directions request failed due to ' + status);
+                        }
+                    });
+                });
+                // $("#mapFrame").show();
+                // <iframe id="mapFrame" class="mapFrameClass initiallyHide" src="./directions.html" name="targetframe" allowTransparency="true"
+                //     scrolling="no" frameborder="0">
+                // </iframe>
+
+
+            });
+
+
+
+
+            // calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+        }
+
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            var selectedMode = "DRIVING";
+            directionsService.route({
+                origin: { lat: 37.77, lng: -122.447 },  // Haight.
+                destination: { lat: 37.768, lng: -122.511 },  // Ocean Beach.
+                // Note that Javascript allows us to access the constant
+                // using square brackets and a string value as its
+                // "property."
+                travelMode: google.maps.TravelMode[selectedMode]
+            }, function (response, status) {
+                if (status == 'OK') {
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9DoXXE9yTPfe5wB8lvdaxwCUEtZxsWvs&callback=initMap">
+    </script>
+</body>
+
+</html>

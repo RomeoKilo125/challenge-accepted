@@ -68,9 +68,18 @@ h3 {
   width: 50%;
 }
 
-#fandangoBtn {
+#fandangoBtn,
+#LyftBtn {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+iframe {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 500px;
 }

@@ -63,7 +63,78 @@ $("#searchSubmit").on("click", function(event) {
 
       var venueTime = eventsArray[rT].start_time;
       console.log("Start Time: " + venueTime);
-      initMap();
+
+      // <iframe id="mapFrame" src="./directions.html" name="targetframe" allowtransparency="true" scrolling="no" frameborder="0"></iframe>
+
+      $.ajax({
+        url:
+          "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+          zipCode +
+          "&key=AIzaSyB9DoXXE9yTPfe5wB8lvdaxwCUEtZxsWvs",
+        method: "GET"
+      }).then(function(response) {
+        source_latLong = response.results[0].geometry.location;
+        console.log(source_latLong);
+
+        $.ajax({
+          url:
+            "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+            venueAddress +
+            "&key=AIzaSyB9DoXXE9yTPfe5wB8lvdaxwCUEtZxsWvs",
+          method: "GET"
+        }).then(function(response) {
+          destination_latLong = response.results[0].geometry.location;
+          console.log(destination_latLong);
+
+          var src =
+            "./directions.html?source=" +
+            encodeURIComponent(zipCode) +
+            "&destination=" +
+            encodeURIComponent(venueAddress);
+
+          var eventTitle = $("<p>");
+          eventTitle.text(randomEvent);
+          eventTitle.addClass("whiteFont");
+
+          $("#mapArea").html(
+            '<iframe id="mapFrame" src=' +
+              src +
+              'name="targetframe" allowtransparency="true" scrolling="no" frameborder="0"></iframe>'
+          );
+
+          var buyNowBtn = $("<a>");
+          buyNowBtn.attr(
+            "href",
+            "https://lyft.com/ride?id=lyft&pickup[latitude]=" +
+              source_latLong.lat +
+              "&pickup[longitude]=" +
+              source_latLong.lng +
+              "&destination[latitude]=" +
+              destination_latLong.lat +
+              "&destination[longitude]=" +
+              destination_latLong.lng
+          );
+          buyNowBtn.attr("id", "LyftBtn");
+          buyNowBtn.addClass("btn btn-info mx-auto");
+          buyNowBtn.attr("role", "button");
+          buyNowBtn.attr("target", "_blank");
+          buyNowBtn.text("Ride with Lyft");
+
+          var eventVenue = $("<p>");
+          eventVenue.text(randomVenue);
+          eventVenue.addClass("whiteFont");
+
+          var eventTime = $("<p>");
+          eventTime.text(venueTime);
+          eventTime.addClass("whiteFont");
+
+          $("#mapArea").append(eventTitle);
+          $("#mapArea").append(eventVenue);
+          $("#mapArea").append(eventTime);
+          $("#mapArea").append(buyNowBtn);
+        });
+      });
+
       return [randomEvent, randomVenue, venueAddress, venueTime];
     }
   });
