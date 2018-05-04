@@ -2,6 +2,7 @@ console.log("linked");
 
 //creating an on click for submitTwo to record what's been input
 var rootRef = database.ref();
+var users = database.ref("users");
 
 $("#searchSubmit").on("click", function(event) {
   event.preventDefault();
@@ -20,11 +21,11 @@ $("#searchSubmit").on("click", function(event) {
   // console.log(date);
 
   var queryURL =
-    "http://data.tmsapi.com/v1.1/movies/showings?startDate=" +
+    "https://data.tmsapi.com/v1.1/movies/showings?startDate=" +
     date +
     "&zip=" +
     zipCode +
-    "&radius=10&api_key=cv2kmy58qkdgyhekzsnz7quz";
+    "&radius=10&api_key=qg7adr9qtevgagx4q4tbxbyk";
 
   $.ajax({
     url: queryURL,
@@ -37,7 +38,6 @@ $("#searchSubmit").on("click", function(event) {
       movieResults = movieChallenger();
 
       var time = moment(movieResults[1], "YYYY-MM-DDThh:mm");
-
     } while (!movieResults[0] || time.diff(moment(), "minutes") < 0);
 
     // set results variables
@@ -51,11 +51,41 @@ $("#searchSubmit").on("click", function(event) {
     console.log("Your Movie Title is: " + title);
     console.log("Playing at this date and time: " + showTime);
     console.log("Playing at this theatre: " + theatre);
+    console.log("desc " + movieResults[3]);
+    console.log("fandango " + movieResults[4]);
+    console.log("poster " + movieResults[5]);
+
+    var movieImg = $("<img>");
+    movieImg.attr("src", movieResults[5]);
+    movieImg.attr("id", "poster");
+
+    var movieDesc = $("<p>");
+    movieDesc.text(movieResults[3]);
+    movieDesc.addClass("whiteFont");
+
+    var buyNowBtn = $("<a>");
+    buyNowBtn.attr("href", movieResults[4]);
+    buyNowBtn.attr("id", "fandangoBtn");
+    buyNowBtn.addClass("btn btn-info mx-auto");
+    buyNowBtn.attr("role", "button");
+    buyNowBtn.attr("target", "_blank");
+    buyNowBtn.text("Buy via Fandango");
+
+    var btnWrapper = $("<div>");
+    buyNowBtn.addClass("mx-auto");
+    btnWrapper.append(buyNowBtn);
+
+    $("#resultArea").append(movieImg);
+    $("#resultArea").append(movieDesc);
+    $("#resultArea").append(btnWrapper);
+
+    $("#resultArea").append("<br>");
+    $("#resultArea").append("<br>");
+    $("#resultArea").append("<br>");
 
     // addResultToDB(userEmail, title, showTime, theatre);
 
     function movieChallenger() {
-
       //creating a random integer to pull random movie titles.
       var rT = Math.floor(Math.random() * response.length);
 
@@ -68,29 +98,43 @@ $("#searchSubmit").on("click", function(event) {
       // store the title of the film
       var randomTitle = selected.title;
 
+      var randomDesc = selected.shortDescription;
+
       // store the showtimes array for the movie
       var randomShowtimesArray = selected.showtimes;
 
+      var fandangoURL = "";
+
+      var posterURL =
+        "https://movies.tmsimg.com/" + selected.preferredImage.uri;
+
       //Showtime array includes the theatres.  We have to run a random number to get theatre selection.
       var selectedShowDateTime = "";
-      var selectedTheatre ="";
+      var selectedTheatre = "";
       do {
-
         var rTheat = Math.floor(Math.random() * randomShowtimesArray.length);
 
         var randomShowtime = randomShowtimesArray[rTheat];
 
         randomShowtimesArray.splice(rTheat, 1);
 
-         selectedShowDateTime = randomShowtime.dateTime;
+        selectedShowDateTime = randomShowtime.dateTime;
 
-         selectedTheatre = randomShowtime.theatre.name;
+        selectedTheatre = randomShowtime.theatre.name;
+
+        fandangoURL = randomShowtime.ticketURI;
 
         var time = moment(selectedShowDateTime, "YYYY-MM-DDThh:mm");
-
       } while (randomShowtimesArray.length > 1 && time.diff(moment(), "mins") < 0);
 
-      return [randomTitle, selectedShowDateTime, selectedTheatre];
+      return [
+        randomTitle,
+        selectedShowDateTime,
+        selectedTheatre,
+        randomDesc,
+        fandangoURL,
+        posterURL
+      ];
     }
   });
 });
