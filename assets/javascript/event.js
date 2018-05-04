@@ -30,14 +30,19 @@ $("#searchSubmit").on("click", function(event) {
     zipCode +
     "&within=20&units=miles&app_key=4D8Nvf3xRhSfBMqB";
 
-  var queryURI = encodeURIComponent(queryString);
-  var cors = "https://cors-proxy.htmldriven.com/?url=";
+  var queryURI = queryString;
+  console.log(queryURI);
+  var cors = "https://cors-anywhere.herokuapp.com/";
 
   var queryURL = cors + queryURI;
 
   $.ajax({
     url: queryURL,
-    method: "GET"
+    method: "GET",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader("origin", "romeokilo125.github.io");
+      xhr.setRequestHeader("x-requested-with", "localhost");
+    }
   }).then(function(response) {
     //console.log(response);
     var showme = JSON.parse(response.body);
