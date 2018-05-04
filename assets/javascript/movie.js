@@ -4,6 +4,14 @@ console.log("linked");
 var rootRef = database.ref();
 var users = database.ref("users");
 
+function toggleHideInput() {
+if  ($('#inputFields').hasClass('onClickHidden')) {
+    $('#inputFields').removeClass('onClickHidden');
+  } else {
+    $('#inputFields').addClass('onClickHidden');
+  }
+}
+
 $("#searchSubmit").on("click", function(event) {
   event.preventDefault();
 
@@ -102,6 +110,8 @@ $("#searchSubmit").on("click", function(event) {
     $("#resultArea").append("<br>");
     $("#resultArea").append("<br>");
     $("#resultArea").append("<br>");
+
+    toggleHideInput();
 
     // addResultToDB(userEmail, title, showTime, theatre);
 
