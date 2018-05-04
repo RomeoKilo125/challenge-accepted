@@ -31,7 +31,7 @@ $("#searchSubmit").on("click", function(event) {
     "&within=20&units=miles&app_key=4D8Nvf3xRhSfBMqB";
 
   var queryURI = encodeURIComponent(queryString);
-  var cors = "http://cors-proxy.htmldriven.com/?url=";
+  var cors = "https://cors-proxy.htmldriven.com/?url=";
 
   var queryURL = cors + queryURI;
 
