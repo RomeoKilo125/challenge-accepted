@@ -7,19 +7,26 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-.jumbotron {
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0);
-  color: white;
-  padding: 0;
+.navbar {
+  height: 100px;
+  margin-bottom: 50px;
 }
 
+ .whiteFont {
+   color: white;
+   text-align: center;
+font-weight: 700;
+ }
 h3 {
   color: white;
 }
 
 hr {
   border-color: white;
+}
+
+#welcoMsg {
+  color: white;
 }
 
 #date {
@@ -31,6 +38,10 @@ hr {
   text-align: center;
   margin: auto;
   color: white;
+}
+
+#welcoMsg {
+  text-align: center;
 }
 
 #instructions {
@@ -54,6 +65,14 @@ hr {
   width: 10%;
 }
 
+#signOutBtn {
+  margin: auto 10px;
+}
+
+#avatarImg {
+  height: 100%;
+}
+
 .g-signin2 {
   width: 100%;
 }
@@ -70,7 +89,7 @@ hr {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 33%;
 }
 
 #fandangoBtn, #LyftBtn {
@@ -86,4 +105,12 @@ iframe {
   margin-right: auto;
   width: 50%;
   height: 500px;
+}
+
+.onClickHidden {
+  display: none;
+}
+
+#resultArea.
+#mapArea {
 }
