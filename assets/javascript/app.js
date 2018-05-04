@@ -67,16 +67,50 @@ function onSignIn(googleUser) {
   console.log("Image URL: " + profile.getImageUrl());
   console.log("Email: " + profile.getEmail());
 
+  var getLoc = function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  };
+
+  getLoc();
+
+  function showPosition(position) {
+    console.log("making call to convert latlong to zip");
+    $.ajax({
+      url:
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        position.coords.latitude +
+        "," +
+        position.coords.longitude +
+        "&key=AIzaSyB9DoXXE9yTPfe5wB8lvdaxwCUEtZxsWvs",
+      method: "GET"
+    }).then(function(response) {
+      console.log(response.results[0].formatted_address);
+      var formatted_address = response.results[0].formatted_address;
+      var rx = /\d{5}(-\d{4})?/;
+      var arr = formatted_address.match(rx);
+      console.log(arr[0]);
+      if (arr[0]) {
+        $("#zipInput").val(arr[0]);
+      }
+    });
+  }
+
   $("#loginModal").modal("toggle");
   $(".showAgain").removeClass("hideInitially");
   $(".showAgain").show();
 
   var welcomMsg = $("#welcoMsg");
+  $("#welcoMsg").addClass("whiteFont");
   welcomMsg.text("Welcome to the Adventure " + profile.getName());
 
   var avatarImg = $("#avatarImg");
   avatarImg.attr("src", profile.getImageUrl());
   avatarImg.attr("alt", profile.getName());
+  $("#avatarImg").show();
 
   var signOutBtn = $("#signOutBtn");
   signOutBtn.addClass("btn btn-primary");
@@ -84,16 +118,23 @@ function onSignIn(googleUser) {
   signOutBtn.attr("href", "#");
   signOutBtn.text("Sign Out");
 
-  signOutBtn.on("click", signOutFn);
+  signOutBtn.on("click", function() {
+    $("#avatarImg").hide();
+    signOutFn();
+  });
 }
 
 function signOutFn() {
   var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function() {
-    console.log("User signed out.");
-  });
+  if (auth2) {
+    auth2.signOut().then(function() {
+      console.log("User signed out.");
+      $("#avatarImg").hide();
+    });
+  }
 
   $(".showAgain").hide();
+  // $("#avatarImg").hide();
   $(".showAgain").addClass("hideInitially");
   $("#loginModal").modal("toggle");
 }
