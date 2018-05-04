@@ -4,9 +4,20 @@ console.log("JSlinked");
 var rootRef = database.ref();
 var users = database.ref("users");
 
+function toggleHideInput() {
+if  ($('#inputFields').hasClass('onClickHidden')) {
+    $('#inputFields').removeClass('onClickHidden');
+  } else {
+    $('#inputFields').addClass('onClickHidden');
+  }
+}
+
+
 $("#searchSubmit").on("click", function(event) {
   console.log("clicked");
   event.preventDefault();
+
+  
 
   //need to set up a function that updates the zip code input from the options page
 
@@ -14,6 +25,12 @@ $("#searchSubmit").on("click", function(event) {
     .val()
     .trim();
   // console.log(zipCode);
+  var re = /\D/;
+
+  // validate that zipcode is exactly 5 digits long
+  if (re.test(zipCode) || zipCode.length !== 5) {
+    return;
+  }
 
   //I think I need a moment.js function to get the date to appear YYYY-MM-DD
   var date = $(".date")
@@ -134,6 +151,9 @@ $("#searchSubmit").on("click", function(event) {
           $("#mapArea").append(buyNowBtn);
         });
       });
+
+      toggleHideInput();
+
 
       return [randomEvent, randomVenue, venueAddress, venueTime];
     }

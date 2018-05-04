@@ -4,15 +4,22 @@ console.log("linked");
 var rootRef = database.ref();
 var users = database.ref("users");
 
+
 $("#searchSubmit").on("click", function(event) {
   event.preventDefault();
 
-  //need to set up a function that updates the zip code input from the options page
+// nofify the user that we're looking for their Challenge
+$('#question').text("We're looking for your challenge, keep your trousers on.")
 
   var zipCode = $(".zipcode")
     .val()
     .trim();
   // console.log(zipCode);
+  var re = /\D/;
+  // validate that zipcode is exactly 5 digits long
+  if (re.test(zipCode) || zipCode.length !== 5) {
+    return;
+  }
 
   //I think I need a moment.js function to get the date to appear YYYY-MM-DD
   var date = $(".date")

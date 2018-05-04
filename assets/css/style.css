@@ -1,4 +1,5 @@
 /* index.html */
+
 body {
   /* background-image: url("../images/blurredStreet.jpeg"); */
   background: url("../images/blurredStreet.jpeg") no-repeat center center fixed;
@@ -6,27 +7,41 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-.jumbotron {
-  text-align: center;
-  background: lightblue;
+.navbar {
+  height: 100px;
+  margin-bottom: 50px;
 }
 
+ .whiteFont {
+   color: white;
+   text-align: center;
+font-weight: 700;
+ }
 h3 {
   color: white;
 }
 
-#date,
-.whiteFont {
-  /* background: lightgray; */
+hr {
+  border-color: white;
+}
+
+#welcoMsg {
+  color: white;
+}
+
+#date {
   text-align: center;
   color: white;
-  font-weight: 800;
 }
 
 #zip {
   text-align: center;
   margin: auto;
   color: white;
+}
+
+#welcoMsg {
+  text-align: center;
 }
 
 #instructions {
@@ -50,13 +65,22 @@ h3 {
   width: 10%;
 }
 
+#signOutBtn {
+  margin: auto 10px;
+}
+
+#avatarImg {
+  height: 100%;
+}
+
 .g-signin2 {
   width: 100%;
 }
 
-.g-signin2 > div {
+.g-signin2>div {
   margin: 0 auto;
 }
+
 .modal-title {
   text-align: center;
 }
@@ -65,15 +89,22 @@ h3 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 33%;
 }
 
-#fandangoBtn,
-#LyftBtn {
+#fandangoBtn, #LyftBtn {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.onClickHidden {
+  display: none;
+}
+
+#resultArea.
+#mapArea {
 }
 
 iframe {
