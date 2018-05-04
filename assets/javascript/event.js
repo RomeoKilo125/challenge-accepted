@@ -63,7 +63,36 @@ $("#searchSubmit").on("click", function(event) {
 
       var venueTime = eventsArray[rT].start_time;
       console.log("Start Time: " + venueTime);
-      initMap();
+
+      // <iframe id="mapFrame" src="./directions.html" name="targetframe" allowtransparency="true" scrolling="no" frameborder="0"></iframe>
+
+      var src =
+        "./directions.html?source=" +
+        encodeURIComponent(zipCode) +
+        "&destination=" +
+        encodeURIComponent(venueAddress);
+      $("#mapArea").html(
+        '<iframe id="mapFrame" src=' +
+          src +
+          'name="targetframe" allowtransparency="true" scrolling="no" frameborder="0"></iframe>'
+      );
+
+      var eventTitle = $("<p>");
+      eventTitle.text(randomEvent);
+      eventTitle.addClass("whiteFont");
+
+      var eventVenue = $("<p>");
+      eventVenue.text(randomVenue);
+      eventVenue.addClass("whiteFont");
+
+      var eventTime = $("<p>");
+      eventTime.text(venueTime);
+      eventTime.addClass("whiteFont");
+
+      $("#mapArea").append(eventTitle);
+      $("#mapArea").append(eventVenue);
+      $("#mapArea").append(eventTime);
+
       return [randomEvent, randomVenue, venueAddress, venueTime];
     }
   });
