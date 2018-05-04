@@ -13,6 +13,11 @@ $("#searchSubmit").on("click", function(event) {
     .val()
     .trim();
   // console.log(zipCode);
+  
+  // validate that zipcode is exactly 5 digits long
+  if (zipCode.match(/\D/) || zipCode.length !== 5) {
+    return;
+  }
 
   //I think I need a moment.js function to get the date to appear YYYY-MM-DD
   var date = $(".date")
