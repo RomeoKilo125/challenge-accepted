@@ -151,7 +151,9 @@ $("#searchSubmit").on("click", function(event) {
           $("#mapArea").append(buyNowBtn);
         });
       });
+
       toggleHideInput();
+
 
       return [randomEvent, randomVenue, venueAddress, venueTime];
     }

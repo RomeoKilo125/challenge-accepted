@@ -99,18 +99,18 @@ hr {
   width: 50%;
 }
 
-iframe {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  height: 500px;
-}
-
 .onClickHidden {
   display: none;
 }
 
 #resultArea.
 #mapArea {
+}
+
+iframe {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 500px;
 }
