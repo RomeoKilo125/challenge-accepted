@@ -16,7 +16,7 @@ $("#searchSubmit").on("click", function(event) {
   // console.log(zipCode);
 
   // validate that zipcode is exactly 5 digits long
-  if (zipCode.match(/\D/) || zipCode.length !== 5) {
+  if (re.test(zipCode) || zipCode.length !== 5) {
     return;
   }
 
