@@ -59,6 +59,18 @@ $("#searchSubmit").on("click", function(event) {
     movieImg.attr("src", movieResults[5]);
     movieImg.attr("id", "poster");
 
+    var movieTitle = $("<p>");
+    movieTitle.text(title);
+    movieTitle.addClass("whiteFont");
+
+    var movieTheatre = $("<p>");
+    movieTheatre.text(theatre);
+    movieTheatre.addClass("whiteFont");
+
+    var movieTime = $("<p>");
+    movieTime.text(showTime);
+    movieTime.addClass("whiteFont");
+
     var movieDesc = $("<p>");
     movieDesc.text(movieResults[3]);
     movieDesc.addClass("whiteFont");
@@ -75,8 +87,11 @@ $("#searchSubmit").on("click", function(event) {
     buyNowBtn.addClass("mx-auto");
     btnWrapper.append(buyNowBtn);
 
+    $("#resultArea").append(movieTitle);
     $("#resultArea").append(movieImg);
     $("#resultArea").append(movieDesc);
+    $("#resultArea").append(movieTheatre);
+    $("#resultArea").append(movieTime);
     $("#resultArea").append(btnWrapper);
 
     $("#resultArea").append("<br>");

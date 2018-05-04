@@ -24,7 +24,7 @@ $("#searchSubmit").on("click", function(event) {
   //api.eventful.com/json/events/search?q=music&l=28282&within=10&units=miles&app_key=4D8Nvf3xRhSfBMqB
 
   var queryString =
-    "http://api.eventful.com/json/events/search?q=music&t=" +
+    "https://api.eventful.com/json/events/search?q=music&t=" +
     date +
     "&l=" +
     zipCode +
@@ -71,15 +71,16 @@ $("#searchSubmit").on("click", function(event) {
         encodeURIComponent(zipCode) +
         "&destination=" +
         encodeURIComponent(venueAddress);
+
+      var eventTitle = $("<p>");
+      eventTitle.text(randomEvent);
+      eventTitle.addClass("whiteFont");
+
       $("#mapArea").html(
         '<iframe id="mapFrame" src=' +
           src +
           'name="targetframe" allowtransparency="true" scrolling="no" frameborder="0"></iframe>'
       );
-
-      var eventTitle = $("<p>");
-      eventTitle.text(randomEvent);
-      eventTitle.addClass("whiteFont");
 
       var eventVenue = $("<p>");
       eventVenue.text(randomVenue);
