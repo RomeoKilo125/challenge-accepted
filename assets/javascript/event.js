@@ -4,9 +4,20 @@ console.log("JSlinked");
 var rootRef = database.ref();
 var users = database.ref("users");
 
+function toggleHideInput() {
+if  ($('#inputFields').hasClass('onClickHidden')) {
+    $('#inputFields').removeClass('onClickHidden');
+  } else {
+    $('#inputFields').addClass('onClickHidden');
+  }
+}
+
+
 $("#searchSubmit").on("click", function(event) {
   console.log("clicked");
   event.preventDefault();
+
+  
 
   //need to set up a function that updates the zip code input from the options page
 
@@ -140,6 +151,7 @@ $("#searchSubmit").on("click", function(event) {
           $("#mapArea").append(buyNowBtn);
         });
       });
+      toggleHideInput();
 
       return [randomEvent, randomVenue, venueAddress, venueTime];
     }

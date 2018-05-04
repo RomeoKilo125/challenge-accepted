@@ -4,18 +4,12 @@ console.log("linked");
 var rootRef = database.ref();
 var users = database.ref("users");
 
-function toggleHideInput() {
-if  ($('#inputFields').hasClass('onClickHidden')) {
-    $('#inputFields').removeClass('onClickHidden');
-  } else {
-    $('#inputFields').addClass('onClickHidden');
-  }
-}
 
 $("#searchSubmit").on("click", function(event) {
   event.preventDefault();
 
-  //need to set up a function that updates the zip code input from the options page
+// nofify the user that we're looking for their Challenge
+$('#question').text("We're looking for your challenge, keep your trousers on.")
 
   var zipCode = $(".zipcode")
     .val()
@@ -110,8 +104,6 @@ $("#searchSubmit").on("click", function(event) {
     $("#resultArea").append("<br>");
     $("#resultArea").append("<br>");
     $("#resultArea").append("<br>");
-
-    toggleHideInput();
 
     // addResultToDB(userEmail, title, showTime, theatre);
 
