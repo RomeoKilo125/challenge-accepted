@@ -57,12 +57,12 @@ function addUser(emailId, zipCode) {
 }
 
 $(window).on("load", function() {
+  $(".initiallyHide").hide();
   signOutFn();
   $("#loginModal").modal({
     backdrop: "static",
     keyboard: false
   });
-  $(".initiallyHide").hide();
 });
 
 function onSignIn(googleUser) {
