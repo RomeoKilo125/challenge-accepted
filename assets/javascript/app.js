@@ -79,7 +79,7 @@ function onSignIn(googleUser) {
       console.log("about to make a call to get zipcode dynamically");
       navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
+      console.log("Geolocation is not supported by this browser.");
     }
   };
 
@@ -103,6 +103,7 @@ function onSignIn(googleUser) {
       console.log(arr[0]);
       if (arr[0]) {
         $("#zipInput").val(arr[0]);
+        $("#zipHelp").text("");
       }
     });
   }
