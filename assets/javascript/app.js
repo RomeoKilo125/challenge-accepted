@@ -69,6 +69,7 @@ function onSignIn(googleUser) {
 
   var getLoc = function() {
     if (navigator.geolocation) {
+      console.log("about to make a call to get zipcode dynamically");
       navigator.geolocation.getCurrentPosition(showPosition);
     } else {
       x.innerHTML = "Geolocation is not supported by this browser.";
@@ -102,6 +103,7 @@ function onSignIn(googleUser) {
   $("#loginModal").modal("toggle");
   $(".showAgain").removeClass("hideInitially");
   $(".showAgain").show();
+  $("#topContainer").removeClass("onClickHidden");
 
   var welcomMsg = $("#welcoMsg");
   $("#welcoMsg").addClass("whiteFont");
@@ -134,7 +136,9 @@ function signOutFn() {
   }
 
   $(".showAgain").hide();
-  // $("#avatarImg").hide();
+  $("#resultArea").empty();
+  $("#mapArea").empty();
+  $("#question").text("So what are we working with here?");
   $(".showAgain").addClass("hideInitially");
   $("#loginModal").modal("toggle");
 }

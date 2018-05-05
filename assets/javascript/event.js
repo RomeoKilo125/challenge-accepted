@@ -5,19 +5,18 @@ var rootRef = database.ref();
 var users = database.ref("users");
 
 function toggleHideInput() {
-if  ($('#inputFields').hasClass('onClickHidden')) {
-    $('#inputFields').removeClass('onClickHidden');
+  $("#question").text("Here are your challenges...");
+
+  if ($("#topContainer").hasClass("onClickHidden")) {
+    $("#topContainer").removeClass("onClickHidden");
   } else {
-    $('#inputFields').addClass('onClickHidden');
+    $("#topContainer").addClass("onClickHidden");
   }
 }
-
 
 $("#searchSubmit").on("click", function(event) {
   console.log("clicked");
   event.preventDefault();
-
-  
 
   //need to set up a function that updates the zip code input from the options page
 
@@ -75,7 +74,8 @@ $("#searchSubmit").on("click", function(event) {
       var randomVenue = eventsArray[rT].venue_name;
       console.log("Your Venue is: " + randomVenue);
 
-      var venueAddress = eventsArray[rT].venue_address;
+      var venueAddress =
+        eventsArray[rT].venue_address + "," + eventsArray[rT].city_name;
       console.log("Located at: " + venueAddress);
 
       var venueTime = eventsArray[rT].start_time;
@@ -107,7 +107,8 @@ $("#searchSubmit").on("click", function(event) {
             "./directions.html?source=" +
             encodeURIComponent(zipCode) +
             "&destination=" +
-            encodeURIComponent(venueAddress);
+            encodeURIComponent(venueAddress) +
+            "&";
 
           var eventTitle = $("<p>");
           eventTitle.text(randomEvent);
@@ -138,7 +139,7 @@ $("#searchSubmit").on("click", function(event) {
           buyNowBtn.text("Ride with Lyft");
 
           var eventVenue = $("<p>");
-          eventVenue.text(randomVenue);
+          eventVenue.text(venueAddress);
           eventVenue.addClass("whiteFont");
 
           var eventTime = $("<p>");
@@ -153,7 +154,6 @@ $("#searchSubmit").on("click", function(event) {
       });
 
       toggleHideInput();
-
 
       return [randomEvent, randomVenue, venueAddress, venueTime];
     }
