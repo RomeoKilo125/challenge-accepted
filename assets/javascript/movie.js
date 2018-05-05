@@ -4,12 +4,13 @@ console.log("linked");
 var rootRef = database.ref();
 var users = database.ref("users");
 
-
 $("#searchSubmit").on("click", function(event) {
   event.preventDefault();
 
-// nofify the user that we're looking for their Challenge
-$('#question').text("We're looking for your challenge, keep your trousers on.")
+  // nofify the user that we're looking for their Challenge
+  $("#question").text(
+    "We're looking for your challenge, keep your trousers on."
+  );
 
   var zipCode = $(".zipcode")
     .val()
@@ -33,6 +34,8 @@ $('#question').text("We're looking for your challenge, keep your trousers on.")
     "&zip=" +
     zipCode +
     "&radius=10&api_key=qg7adr9qtevgagx4q4tbxbyk";
+
+  addUser(userEmail, zipCode);
 
   $.ajax({
     url: queryURL,

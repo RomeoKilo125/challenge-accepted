@@ -13,10 +13,10 @@ var rootRef = database.ref();
 
 var userObj = {
   userId: "",
-  zipCode: 0
+  zipCode: []
 };
 
-function addUser(emailId) {
+function addUser(emailId, zipCode) {
   console.log("addUser function invoked");
   if (emailId) {
     userEmail = emailId;
@@ -27,9 +27,27 @@ function addUser(emailId) {
       .orderByChild("userId")
       .equalTo(userEmail);
 
-    userIdRef.on("value", function(snapshot) {
+    userIdRef.once("value", function(snapshot) {
       if (snapshot.val()) {
         console.log(userEmail + " is present");
+
+        var query = firebase
+          .database()
+          .ref("users")
+          .orderByKey();
+        query.once("value").then(function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            // key will be "ada" the first time and "alan" the second time
+            var key = childSnapshot.key;
+            // childData will be the actual contents of the child
+            var childData = childSnapshot.ref.child("zipCode").push();
+
+            if (zipCode) {
+              childData.set(zipCode);
+            }
+            console.log(childData);
+          });
+        });
       } else {
         console.log(userEmail + " is a new user");
         var usersRef = rootRef.child("users").push();
@@ -48,7 +66,6 @@ $(window).on("load", function() {
     backdrop: "static",
     keyboard: false
   });
-
   $(".initiallyHide").hide();
 });
 
