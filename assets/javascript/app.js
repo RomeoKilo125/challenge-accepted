@@ -16,18 +16,10 @@ var userObj = {
   zipCode: 0
 };
 
-$("#loginSubmit").on("click", addUser);
-
-function addUser() {
+function addUser(emailId) {
   console.log("addUser function invoked");
-  if (
-    $("#inputEmail")
-      .val()
-      .trim() !== ""
-  ) {
-    userEmail = $("#inputEmail")
-      .val()
-      .trim();
+  if (emailId) {
+    userEmail = emailId;
     userObj.userId = userEmail;
 
     var userIdRef = rootRef
@@ -66,6 +58,8 @@ function onSignIn(googleUser) {
   console.log("Name: " + profile.getName());
   console.log("Image URL: " + profile.getImageUrl());
   console.log("Email: " + profile.getEmail());
+
+  addUser(profile.getEmail());
 
   var getLoc = function() {
     if (navigator.geolocation) {
