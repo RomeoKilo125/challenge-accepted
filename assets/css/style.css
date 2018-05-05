@@ -30,7 +30,8 @@ hr {
   font-size: 30px;
 }
 
-#date {
+#date,
+#zipHelp {
   text-align: center;
   color: white;
 }
@@ -103,9 +104,6 @@ hr {
 
 .onClickHidden {
   display: none;
-}
-
-#resultArea. #mapArea {
 }
 
 iframe {

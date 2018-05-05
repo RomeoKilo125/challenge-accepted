@@ -1,8 +1,4 @@
-console.log("JSlinked");
-
 //creating an on click for submitTwo to record what's been input
-var rootRef = database.ref();
-var users = database.ref("users");
 
 function toggleHideInput() {
   $("#question").text("Here are your challenges...");
@@ -15,7 +11,6 @@ function toggleHideInput() {
 }
 
 $("#searchSubmit").on("click", function(event) {
-  console.log("clicked");
   event.preventDefault();
 
   //need to set up a function that updates the zip code input from the options page
@@ -28,6 +23,7 @@ $("#searchSubmit").on("click", function(event) {
 
   // validate that zipcode is exactly 5 digits long
   if (re.test(zipCode) || zipCode.length !== 5) {
+    $("#zipHelp").text("Invalid US Zip");
     return;
   }
 
@@ -55,7 +51,6 @@ $("#searchSubmit").on("click", function(event) {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    //console.log(response);
     var showme = JSON.parse(response.body);
     var eventsArray = showme.events.event;
     console.log(event);
@@ -80,8 +75,6 @@ $("#searchSubmit").on("click", function(event) {
 
       var venueTime = eventsArray[rT].start_time;
       console.log("Start Time: " + venueTime);
-
-      // <iframe id="mapFrame" src="./directions.html" name="targetframe" allowtransparency="true" scrolling="no" frameborder="0"></iframe>
 
       $.ajax({
         url:
@@ -167,19 +160,3 @@ $("#searchSubmit").on("click", function(event) {
 //use a math.random to draw from the results to spit out a movie and movie theater selection.
 
 //4-30-2018 -Need to create a function to pull a random movie and then a random theater and showtime for that movie
-
-function addResultToDB(userEmail, title, showTime, theatre, zipCode) {
-  var userIdRef = rootRef
-    .child("users")
-    .orderByChild("userId")
-    .equalTo(userEmail);
-
-  userIdRef.on("child_added", function(snap) {
-    snap.ref.update({
-      title: title,
-      showTime: showTime,
-      theatre: theatre,
-      zipCode: zipCode
-    });
-  });
-}

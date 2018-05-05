@@ -37,15 +37,12 @@ function addUser(emailId, zipCode) {
           .orderByKey();
         query.once("value").then(function(snapshot) {
           snapshot.forEach(function(childSnapshot) {
-            // key will be "ada" the first time and "alan" the second time
             var key = childSnapshot.key;
-            // childData will be the actual contents of the child
             var childData = childSnapshot.ref.child("zipCode").push();
 
             if (zipCode) {
               childData.set(zipCode);
             }
-            console.log(childData);
           });
         });
       } else {
@@ -53,7 +50,6 @@ function addUser(emailId, zipCode) {
         var usersRef = rootRef.child("users").push();
         usersRef.set(userObj);
       }
-      console.log(snapshot.val());
     });
   } else {
     alert("Come on now!! Email ID cannot be empty");

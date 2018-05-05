@@ -1,32 +1,27 @@
-console.log("linked");
-
 //creating an on click for submitTwo to record what's been input
-var rootRef = database.ref();
-var users = database.ref("users");
 
 $("#searchSubmit").on("click", function(event) {
   event.preventDefault();
+
+  var zipCode = $(".zipcode")
+    .val()
+    .trim();
+  var re = /\D/;
+  // validate that zipcode is exactly 5 digits long
+  if (re.test(zipCode) || zipCode.length !== 5) {
+    $("#zipHelp").text("Invalid US Zip");
+    return;
+  }
 
   // nofify the user that we're looking for their Challenge
   $("#question").text(
     "We're looking for your challenge, keep your trousers on."
   );
 
-  var zipCode = $(".zipcode")
-    .val()
-    .trim();
-  // console.log(zipCode);
-  var re = /\D/;
-  // validate that zipcode is exactly 5 digits long
-  if (re.test(zipCode) || zipCode.length !== 5) {
-    return;
-  }
-
   //I think I need a moment.js function to get the date to appear YYYY-MM-DD
   var date = $(".date")
     .val()
     .trim();
-  // console.log(date);
 
   var queryURL =
     "https://data.tmsapi.com/v1.1/movies/showings?startDate=" +
@@ -108,8 +103,6 @@ $("#searchSubmit").on("click", function(event) {
     $("#resultArea").append("<br>");
     $("#resultArea").append("<br>");
 
-    // addResultToDB(userEmail, title, showTime, theatre);
-
     function movieChallenger() {
       //creating a random integer to pull random movie titles.
       var rT = Math.floor(Math.random() * response.length);
@@ -171,20 +164,3 @@ $("#searchSubmit").on("click", function(event) {
 //use a math.random to draw from the results to spit out a movie and movie theater selection.
 
 //4-30-2018 -Need to create a function to pull a random movie and then a random theater and showtime for that movie
-
-function addResultToDB(userEmail, title, showTime, theatre) {
-  var userIdRef = rootRef
-    .child("users")
-    .orderByChild("userId")
-    .equalTo(userEmail);
-
-  userIdRef.on("child_added", function(snap) {
-    console.log(
-      snap.ref.update({
-        title: title,
-        showTime: showTime,
-        theatre: theatre
-      })
-    );
-  });
-}
